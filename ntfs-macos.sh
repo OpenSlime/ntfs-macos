@@ -1,15 +1,22 @@
-version=0.9-beta
+version=1.0-beta1
 homebrew_install() {
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
-    brew doctor;
+    echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
 };
 
 ntfs_3g_enable() {
     if [[ $(brew doctor) != "Your system is ready to brew." ]];
     then
         homebrew_install;
-        brew cask install osxfuse;
-        brew install ntfs-3g;
+            if [[ $(brew doctor) == "Your system is ready to brew." ]];
+            then
+                brew cask install osxfuse;
+                brew install ntfs-3g;
+            else
+                echo "Errore 1: Homebrew non funzionante";
+                echo "Controlla l'errore che ti dà e riavvia lo script";
+                exit 1;
+        fi;
     else
         brew cask install osxfuse;
         brew install ntfs-3g;
@@ -172,7 +179,7 @@ about() {
     echo "╔═══════════════════════╡ OpenSlime ╞═══════════════════════╗";
     echo "║ Script creato da gstux e OlioDiPalmas per OpenSlime.it    ║";
     echo "║                                                           ║";
-    echo "║ Versione script: ${version}                                 ║";
+    echo "║ Versione script: ${version}                                ║";
     echo "║                                                           ║";
     echo "║ Questo script è distribuito sotto licenza MIT             ║";
     echo "║ Puoi guardarla dal file LICENSE oppure inviando 1         ║";
