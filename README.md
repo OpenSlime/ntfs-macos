@@ -82,5 +82,3 @@ Per leggerla, apri il file LICENSE oppure, avviato lo script, vai su 3) Informaz
 * [Homebrew](https://github.com/Homebrew) per il suo incredibile package manager
 * [osxfuse](https://github.com/osxfuse/osxfuse) per FUSE for macOS e per la wiki su [NTFS-3G](https://github.com/osxfuse/osxfuse/wiki/NTFS-3G)
 * [Learn-a-holic Geek Notes](http://learnaholic.me/2013/11/11/enable-ntfs-write-on-mac-os-x-mavericks/) per l'articolo su fstab
-
-(readme in sviluppo...)
