@@ -6,7 +6,7 @@ Tutti i comandi necessari li farà **lui**. Tu dovrai solo confermare e, quando 
 # Preparazione
 
 **Requisiti**
-* OS X 10.9 e superiori (consigliato: macOS 10.11 e superiori)
+* OS X 10.9 e superiori (consigliato: OS X 10.11 e superiori)
 * SIP disattivato (vedi Disattivazione SIP)
 * Buona connessione Internet
 * Command Line Tools di Xcode
@@ -26,6 +26,8 @@ chmod 755 ntfs-macos.sh
 
 Prima di avviare lo script, è necessario **disattivare il SIP** se vuoi usare il metodo Homebrew e ntfs-3g. Per fstab è opzionale.
 
+**Nota:** il SIP è stato introdotto da **OS X El Capitan (10.11) e successivi**. Se hai una versione di OS X **precedente** alla 10.11, disattivare/riattivare il SIP è **inutile** e puoi tranquillamente avviare lo script, saltando questa guida.
+
 1. Spegni il Mac e riaccendilo, tenendo premuto cmd (⌘) + R per entrare in modalità recovery
 2. Dopo qualche minuto, sarai nella modalità recovery. Sulla barra in alto clicca su Utility e apri il Terminale
 3. Aperto il terminale, scrivi questo comando e premi Invio:
@@ -41,6 +43,8 @@ Non ti resta che riavviare il Mac e finalmente avviare il nostro script :grin:
 ### Riattivazione SIP
 
 Dopo aver completato il metodo Homebrew e ntfs-3g, è **consigliato riabilitare SIP**, per rendere il tuo macOS meno vulnerabile.
+
+**Nota:** il SIP è stato introdotto da **OS X El Capitan (10.11) e successivi**. Se hai una versione di OS X **precedente** alla 10.11, disattivare/riattivare il SIP è **inutile** e puoi tranquillamente avviare lo script, saltando questa guida.
 
 1. Spegni il Mac e riavviarlo in modalità recovery
 2. Apri il Terminale e invia questo:
@@ -62,7 +66,7 @@ I due modi per abilitare la scrittura NTFS sono:
 
 Ovviamente dovrai scegliere **solo uno** di questi modi.
 
-## Se vuoi usare fstab...
+### Se vuoi usare fstab...
 * Per aggiungere un altro device NTFS, **dovrai rifare l'operazione**
 * Collegando il device NTFS, questo **non** comparirà nella scrivania. Sarà nella cartella Volumes, già presente nella scrivania dopo aver completato l'operazione "Abilita scrittura NTFS"
 * L'opzione "Disabilita scrittura NTFS" rimuove **completamente** il file /etc/fstab
