@@ -36,6 +36,7 @@ ntfs_3g_enable() {
 
     if [[ $reboot == "y" || $reboot == "Y" ]];
     then
+        echo "Va bene :^)";
         sudo reboot;
     fi;
 };
@@ -71,6 +72,7 @@ ntfs_3g_disable() {
     read reboot;
     if [[ $reboot == "y" || $reboot == "Y" ]];
     then
+        echo "Va bene :^)";
         sudo reboot;
     fi;
 };
@@ -88,6 +90,7 @@ fstab_enable() {
     read reboot;
     if [[ $reboot == "y" || $reboot == "Y" ]];
     then
+        echo "Va bene :^)";
         sudo reboot;
     fi;
 };
@@ -107,6 +110,7 @@ fstab_disable() {
         read reboot;
         if [[ $reboot == "y" || $reboot == "Y" ]];
         then
+            echo "Va bene :^)";
             sudo reboot;
         fi;
     else
