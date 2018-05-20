@@ -1,10 +1,14 @@
-version=1.0-beta1
+version=1.0-beta2
 homebrew_install() {
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
     echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
 };
 
 ntfs_3g_enable() {
+    echo "Inserisci il nome completo del tuo disco.";
+    echo "Per trovarlo, apri Utility Disco in Applicazioni > Utility dal Finder e vedi il nome della partizione (es. Macintosh HD)";
+    read disk;
+
     if [[ $(brew doctor) != "Your system is ready to brew." ]];
     then
         homebrew_install;
@@ -22,9 +26,6 @@ ntfs_3g_enable() {
         brew install ntfs-3g;
     fi;
 
-    echo "Inserisci il nome completo del tuo disco.";
-    echo "Per trovarlo, apri Utility Disco in Applicazioni > Utility dal Finder e vedi il nome della partizione (es. Macintosh HD)";
-    read disk;
     sudo mv "/Volumes/${disk}/sbin/mount_ntfs" "/Volumes/${disk}/sbin/mount_ntfs.orig";
     sudo ln -s "/usr/local/sbin/mount_ntfs" "/Volumes/${disk}/sbin/mount_ntfs";
     echo "" && echo "";
