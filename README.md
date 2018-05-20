@@ -7,6 +7,7 @@ Tutti i comandi necessari li farà **lui**. Tu dovrai solo confermare e, quando 
 
 **Requisiti**
 * OS X 10.9 e superiori (consigliato: macOS 10.11 e superiori)
+* SIP disattivato **(!!!)**
 * Buona connessione Internet
 * Command Line Tools di Xcode
 
