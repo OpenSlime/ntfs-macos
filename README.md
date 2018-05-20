@@ -38,7 +38,8 @@ Ovviamente dovrai scegliere **solo uno** di questi modi.
 * L'opzione "Disabilita scrittura NTFS" rimuove **completamente** il file /etc/fstab
 
 # Licenza
-Lo script usa la licenza MIT. Per leggerla, apri il file LICENSE oppure, avviato lo script, vai su 3) Informazioni > 1) Vedi ora la licenza.
+Lo script usa la licenza MIT.
+Per leggerla, apri il file LICENSE oppure, avviato lo script, vai su 3) Informazioni > 1) Vedi ora la licenza.
 
 # Crediti
 * gstux per aver creato lo script
