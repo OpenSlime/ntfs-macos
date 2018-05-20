@@ -7,7 +7,7 @@ Tutti i comandi necessari li farà **lui**. Tu dovrai solo confermare e, quando 
 
 **Requisiti**
 * OS X 10.9 e superiori (consigliato: macOS 10.11 e superiori)
-* SIP disattivato **(!!!)**
+* SIP disattivato (vedi Disattivazione SIP)
 * Buona connessione Internet
 * Command Line Tools di Xcode
 
@@ -22,6 +22,36 @@ cd ntfs-macos
 chmod 755 ntfs-macos.sh
 ./ntfs-macos.sh           # Avvia lo script
 ```
+## Disattivazione SIP
+
+Prima di avviare lo script, è necessario **disattivare il SIP** se vuoi usare il metodo Homebrew e ntfs-3g. Per fstab è opzionale.
+
+1. Spegni il Mac e riaccendilo, tenendo premuto cmd (⌘) + R per entrare in modalità recovery
+2. Dopo qualche minuto, sarai nella modalità recovery. Sulla barra in alto clicca su Utility e apri il Terminale
+3. Aperto il terminale, scrivi questo comando e premi Invio:
+```
+csrutil disable
+```
+4. Se compare questo, complimenti! Hai disattivato il SIP :smiley:
+```
+Successfully disabled System Integrity Protection. Please restart the machine for the changes to take effect.
+```
+Non ti resta che riavviare il Mac e finalmente avviare il nostro script :grin:
+
+### Riattivazione SIP
+
+Dopo aver completato il metodo Homebrew e ntfs-3g, è **consigliato riabilitare SIP**, per rendere il tuo macOS meno vulnerabile.
+
+1. Spegni il Mac e riavviarlo in modalità recovery
+2. Apri il Terminale e invia questo:
+```
+csrutil enable
+```
+3. Se compare questo, hai riattivato il SIP con successo:
+```
+Successfully enabled System Integrity Protection. Please restart the machine for the changes to take effect.
+```
+
 # Come usarlo
 Muoviti nei menu inviando il numero/opzione desiderato. Scegli uno dei modi che più ti piace. Segui quello che dice lo script per completare l'operazione senza problemi.
 
