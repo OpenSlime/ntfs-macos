@@ -39,6 +39,7 @@ Ovviamente dovrai scegliere **solo uno** di questi modi.
 
 # Licenza
 Lo script usa la licenza MIT.
+
 Per leggerla, apri il file LICENSE oppure, avviato lo script, vai su 3) Informazioni > 1) Vedi ora la licenza.
 
 # Crediti
