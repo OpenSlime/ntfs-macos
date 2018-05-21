@@ -1,4 +1,4 @@
-version=1.0-beta2
+version=1.0-beta3
 homebrew_install() {
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
     echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
@@ -118,6 +118,39 @@ fstab_disable() {
     fi;
 };
 
+fstab_editor() {
+    clear;
+    echo "Scrivi il nome del text editor desiderato (es. nvim)";
+    read editor;
+    sudo ${editor} /etc/fstab;
+    clear;
+    echo "Finito di modificare? Vuoi ritornare al menu? (y/n)";
+    echo "Inviando 'q' uscirai dallo script"
+    read input;
+    if [[ $input == "y" || $input == "Y" ]]
+    then
+        fstab_edit;
+    else if [[ $input == "n" || $input == "N" ]]
+    then
+        echo "";
+        echo "Vuoi usare lo stesso text editor? (y/n)";
+        echo "Dopo che avrai finito, ritornerai al menu";
+        read input;
+        if [[ $input == "y" || $input == "Y" ]]
+        then
+            sudo ${editor} /etc/fstab;
+            fstab_edit;
+        else
+            fstab_editor;
+        fi;
+        else if [[ $input == "q" || $input == "Q" ]]
+            then
+                clear;
+            fi;
+        fi;
+    fi;
+};
+
 ntfs_3g_menu() {
     clear
     echo "╔═══════════════════════╡ OpenSlime ╞═══════════════════════╗";
@@ -152,15 +185,16 @@ fstab_menu() {
     echo "╔═══════════════════════╡ OpenSlime ╞═══════════════════════╗";
     echo "║ Hai scelto: fstab                                         ║";
     echo "║                                                           ║";
-    echo "║ ATTENZIONE: leggi gli avvisi nel README prima di          ║";
-    echo "║ continuare! USALO A TUO RISCHIO E PERICOLO!               ║";
+    echo "║      ATTENZIONE: leggi il README prima di continuare      ║";
+    echo "║              USALO A TUO RISCHIO E PERICOLO!              ║";
     echo "║                                                           ║";
     echo "║ Scegli un'opzione                                         ║";
     echo "╠═══╦═══════════════════════════════════════════════════════╣";
     echo "║ 1 ║ Abilita scrittua NTFS                                 ║";
     echo "║ 2 ║ Disabilita scrittura NTFS                             ║";
-    echo "║ 3 ║ Torna indietro                                        ║";
-    echo "║ 4 ║ Esci                                                  ║";
+    echo "║ 3 ║ Modifica manualmente /etc/fstab                       ║";
+    echo "║ 4 ║ Torna indietro                                        ║";
+    echo "║ 5 ║ Esci                                                  ║";
     echo "╚═══╩═══════════════════════════════════════════════════════╝";
     read input;
     case ${input} in
@@ -171,11 +205,48 @@ fstab_menu() {
             clear;
             fstab_disable;;
         "3")
-            main_menu;;
+            fstab_edit;;
         "4")
+            main_menu;;
+        "5")
             clear;;
         *)
             fstab_menu;;
+    esac;
+};
+
+fstab_edit() {
+    clear;
+    echo "╔═══════════════════════╡ OpenSlime ╞═══════════════════════╗";
+    echo "║ Vuoi modificare il file /etc/fstab                        ║";
+    echo "║ Con quale text editor vuoi aprirlo?                       ║";
+    echo "╠═══╦═══════════════════════════════════════════════════════╣";
+    echo "║ 1 ║ nano (consigliato)                                    ║";
+    echo "║ 2 ║ vim                                                   ║";
+    echo "║ 3 ║ emacs                                                 ║";
+    echo "║ 4 ║ Altro                                                 ║";
+    echo "║ 5 ║ Torna indietro                                        ║";
+    echo "╚═══╩═══════════════════════════════════════════════════════╝";
+    read input;
+    case ${input} in
+        "1")
+            clear;
+            sudo nano /etc/fstab;
+            fstab_menu;;
+        "2")
+            clear;
+            sudo vim /etc/fstab;
+            fstab_menu;;
+        "3")
+            clear;
+            sudo emacs /etc/fstab;
+            fstab_menu;;
+        "4")
+            fstab_editor;;
+        "5")
+            fstab_menu;;
+        *)
+            fstab_edit;;
     esac;
 };
 
