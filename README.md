@@ -22,6 +22,10 @@ cd ntfs-macos
 chmod 755 ntfs-macos.sh
 ./ntfs-macos.sh           # Avvia lo script
 ```
+Se non stai usando bash ma un'altra shell (es. fish), per avviare lo script usa invece questo comando:
+```
+bash ntfs-macos.sh
+```
 ## Disattivazione SIP
 
 Prima di avviare lo script, è necessario **disattivare il SIP** se vuoi usare il metodo Homebrew e ntfs-3g. Per fstab è opzionale.
