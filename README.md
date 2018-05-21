@@ -75,7 +75,7 @@ Ovviamente dovrai scegliere **solo uno** di questi modi.
 * Collegando il device NTFS, questo **non** comparirà nella scrivania. Sarà nella cartella Volumes, già presente nella scrivania dopo aver completato l'operazione "Abilita scrittura NTFS"
 * L'opzione "Disabilita scrittura NTFS" rimuove **completamente** il file /etc/fstab
 * Se hai sbagliato a scrivere il nome del device durante l'operazione oppure vuoi rimuovere solo un device e non l'intero file, lo script ti permette di modificare /etc/fstab tramite l'opzione **"Modifica manualmente /etc/fstab"**
-* Nel caso stai modificando il file /etc/fstab per sistemare il nome del device, devi toccare **solamente** la parte "LABEL=". Modificare altro senza motivo può rendere impossibile il mount e quindi non poter usare il device nel Mac o peggio
+* Nel caso stai modificando il file /etc/fstab per sistemare il nome del device, devi toccare **solamente** la parte "LABEL=". Modificare altro senza motivo può rendere impossibile il mount e quindi non poter usare il device nel Mac o peggio (anche se basta rimuovere il file /etc/fstab per risolvere il problema :new_moon_with_face:)
 
 # Licenza
 Lo script usa la licenza MIT.
