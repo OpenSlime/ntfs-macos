@@ -18,8 +18,8 @@ ntfs_3g_enable() {
                 brew install ntfs-3g
             else
                 echo "Errore 1: Homebrew non funzionante"
-                echo "Controlla l'errore che ti dà e riavvia lo script";
-                exit 1;
+                echo "Controlla l'errore che ti dà e riavvia lo script"
+                exit 1
         fi
     else
         brew cask install osxfuse
