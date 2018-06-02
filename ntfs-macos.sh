@@ -1,4 +1,4 @@
-version=1.0-rc1
+version=1.0-rc2
 homebrew_install() {
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
@@ -209,7 +209,7 @@ ntfs_3g_menu() {
         "2")
             clear;
             sip;
-            ntfs_3g_enable;;
+            ntfs_3g_disable;;
         "3")
             main_menu;;
         "4")
