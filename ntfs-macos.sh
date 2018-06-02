@@ -1,4 +1,4 @@
-version=1.0-rc2
+version=1.0-rc3
 homebrew_install() {
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
@@ -115,8 +115,7 @@ ntfs_3g_disable() {
 };
 
 fstab_enable() {
-    echo "Inserisci il nome completo del tuo disco (NON deve contenere spazi)."
-    echo "Per trovarlo, apri Utility Disco in Applicazioni > Utility dal Finder e vedi il nome della partizione (es. Macintosh HD)"
+    echo "Inserisci il nome completo del tuo disco NTFS (NON deve contenere spazi)."
     read disk
     echo "LABEL=${disk}  none    ntfs    rw,auto,nobrowse" | sudo tee -a /etc/fstab
     sudo ln -s /Volumes ~/Desktop/Volumes
@@ -156,36 +155,35 @@ fstab_disable() {
 };
 
 fstab_editor() {
-    clear
-    echo "Scrivi il nome del text editor desiderato (es. nvim)"
-    read editor
-    sudo ${editor} /etc/fstab
-    clear
-    echo "Finito di modificare? Vuoi ritornare al menu? (y/n)"
-    echo "Inviando 'q' uscirai dallo script"
-    read input
-    if [[ $input == "y" || $input == "Y" ]];
-    then
-        fstab_edit
-    else if [[ $input == "n" || $input == "N" ]];
-    then
-        echo ""
-        echo "Vuoi usare lo stesso text editor? (y/n)"
-        echo "Dopo che avrai finito, ritornerai al menu"
-        read input
-        if [[ $input == "y" || $input == "Y" ]];
-        then
-            sudo ${editor} /etc/fstab
-            fstab_edit
-        else
-            fstab_editor
-        fi
-        else if [[ $input == "q" || $input == "Q" ]];
-            then
-                clear
-            fi
-        fi
+      clear
+      echo "Scrivi il nome del text editor desiderato (es. nvim)"
+      read editor
+      sudo ${editor} /etc/fstab
+      clear
+      echo "Finito di modificare? Vuoi ritornare al menu? (y/n)"
+      echo "Inviando 'q' uscirai dallo script"
+      read input
+      if [[ $input == "y" || $input == "Y" ]];
+      then
+          fstab_edit
+      else if [[ $input == "n" || $input == "N" ]];
+      then
+          echo ""
+          echo "Vuoi usare lo stesso text editor? (y/n)"
+          echo "Dopo che avrai finito, ritornerai al menu"
+          read input
+          if [[ $input == "y" || $input == "Y" ]];
+          then
+              sudo ${editor} /etc/fstab
+              fstab_edit
+          else
+              fstab_editor
+          fi
+      else if [[ $input == "q" || $input == "Q" ]]; then
+        clear
+      fi
     fi
+  fi
 };
 
 ntfs_3g_menu() {
