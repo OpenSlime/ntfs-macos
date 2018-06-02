@@ -1,34 +1,36 @@
-version=1.0-rc3
+version=1.0-rc4
 homebrew_install() {
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
 }
 
-sip() {
+sip_enablentfs() {
     if [[ $(csrutil status) == "System Integrity Protection status: disabled." ]]; then
-    clear
+    ntfs_3g_enable
     else
       if [[ $(csrutil status) == "System Integrity Protection status: enabled." ]]; then
         echo "Vedo che non hai disattivato il SIP prima di avviare lo script"
         echo "Per favore disattivalo tramite la guida presente nel README e poi riprova"
         echo ""
-        echo "Premi Invio per ritornare al menu principale, altrimenti 'q' per uscire dallo script"
+        echo "Premi Invio per ritornare al menu principale"
+        echo "Altrimenti 'q' per uscire dallo script"
         read input
-        if [[ $input == * ]]; then
-          main_menu
-        else if [[ $input == "q" || $input == "Q" ]]; then
+        if [[ $input == "q" || $input == "Q" ]]; then
           exit
-          fi
+        else
+          main_menu
         fi
       else if [[ $(defaults read loginwindow SystemVersionStampAsString) == 10.9.* || $(defaults read loginwindow SystemVersionStampAsString) == 10.10.* ]]; then
-        clear
+        ntfs_3g_enable
       else
         echo "Errore 2: impossibile riconoscere lo stato del SIP"
         echo "Stai usando una versione di OS X inferiore alla 10.9?"
         echo ""
         echo "Se si, ti consiglio di aggiornare il Mac o usare il metodo fstab"
         echo "Se no, segnala il bug su https://github.com/OpenSlime/ntfs-macos/issues"
-        echo "Premi Invio per ritornare al menu principale, altrimenti 'q' per uscire dallo script"
+        echo ""
+        echo "Premi Invio per ritornare al menu principale"
+        echo "Altrimenti 'q' per uscire dallo script"
         read input
         if [[ $input == * ]]; then
           main_menu
@@ -76,7 +78,46 @@ ntfs_3g_enable() {
         echo "Va bene :^)"
         sudo reboot
     fi
-};
+}
+
+sip_disablentfs() {
+    if [[ $(csrutil status) == "System Integrity Protection status: disabled." ]]; then
+    ntfs_3g_disable
+    else
+      if [[ $(csrutil status) == "System Integrity Protection status: enabled." ]]; then
+        echo "Vedo che non hai disattivato il SIP prima di avviare lo script"
+        echo "Per favore disattivalo tramite la guida presente nel README e poi riprova"
+        echo ""
+        echo "Premi Invio per ritornare al menu principale"
+        echo "Altrimenti 'q' per uscire dallo script"
+        read input
+        if [[ $input == "q" || $input == "Q" ]]; then
+          exit
+        else
+          main_menu
+        fi
+      else if [[ $(defaults read loginwindow SystemVersionStampAsString) == 10.9.* || $(defaults read loginwindow SystemVersionStampAsString) == 10.10.* ]]; then
+        ntfs_3g_disable
+      else
+        echo "Errore 2: impossibile riconoscere lo stato del SIP"
+        echo "Stai usando una versione di OS X inferiore alla 10.9?"
+        echo ""
+        echo "Se si, ti consiglio di aggiornare il Mac o usare il metodo fstab"
+        echo "Se no, segnala il bug su https://github.com/OpenSlime/ntfs-macos/issues"
+        echo ""
+        echo "Premi Invio per ritornare al menu principale"
+        echo "Altrimenti 'q' per uscire dallo script"
+        read input
+        if [[ $input == * ]]; then
+          main_menu
+        else if [[ $input == "q" || $input == "Q" ]]; then
+          exit 2
+          fi
+        fi
+      fi
+    fi
+  fi
+}
 
 ntfs_3g_disable() {
     echo "Vuoi davvero disabilitare la scrittura NTFS? (y/n)"
@@ -112,7 +153,7 @@ ntfs_3g_disable() {
         echo "Va bene :^)"
         sudo reboot
     fi
-};
+}
 
 fstab_enable() {
     echo "Inserisci il nome completo del tuo disco NTFS (NON deve contenere spazi)."
@@ -129,7 +170,7 @@ fstab_enable() {
         echo "Va bene :^)"
         sudo reboot
     fi
-};
+}
 
 fstab_disable() {
     echo "Continuando eliminerai completamente il file /etc/fstab. Continuare? (y/n)"
@@ -152,7 +193,7 @@ fstab_disable() {
     else
         fstab_menu
     fi
-};
+}
 
 fstab_editor() {
       clear
@@ -184,7 +225,7 @@ fstab_editor() {
       fi
     fi
   fi
-};
+}
 
 ntfs_3g_menu() {
     clear
@@ -202,12 +243,12 @@ ntfs_3g_menu() {
     case ${input} in
         "1")
             clear;
-            sip;
-            ntfs_3g_enable;;
+            sip_enablentfs;
+            exit;;
         "2")
             clear;
-            sip;
-            ntfs_3g_disable;;
+            sip_disablentfs;
+            exit;;
         "3")
             main_menu;;
         "4")
@@ -215,7 +256,7 @@ ntfs_3g_menu() {
         *)
             ntfs_3g_menu;;
     esac;
-};
+}
 
 fstab_menu() {
     clear
@@ -250,7 +291,7 @@ fstab_menu() {
         *)
             fstab_menu;;
     esac
-};
+}
 
 fstab_edit() {
     clear
@@ -285,7 +326,7 @@ fstab_edit() {
         *)
             fstab_edit;;
     esac
-};
+}
 
 about() {
     clear
@@ -314,7 +355,7 @@ about() {
         *)
             about;;
     esac
-};
+}
 
 license() {
     clear
@@ -331,7 +372,7 @@ license() {
         *)
             license;;
     esac
-};
+}
 
 main_menu() {
     clear
@@ -359,6 +400,6 @@ main_menu() {
         *)
             main_menu;;
     esac
-};
+}
 
 main_menu
