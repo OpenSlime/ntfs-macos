@@ -1,7 +1,44 @@
-version=1.0-beta3
+version=1.0-rc1
 homebrew_install() {
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
+}
+
+sip() {
+    if [[ $(csrutil status) == "System Integrity Protection status: disabled." ]]; then
+    clear
+    else
+      if [[ $(csrutil status) == "System Integrity Protection status: enabled." ]]; then
+        echo "Vedo che non hai disattivato il SIP prima di avviare lo script"
+        echo "Per favore disattivalo tramite la guida presente nel README e poi riprova"
+        echo ""
+        echo "Premi Invio per ritornare al menu principale, altrimenti 'q' per uscire dallo script"
+        read input
+        if [[ $input == * ]]; then
+          main_menu
+        else if [[ $input == "q" || $input == "Q" ]]; then
+          exit
+          fi
+        fi
+      else if [[ $(defaults read loginwindow SystemVersionStampAsString) == 10.9.* || $(defaults read loginwindow SystemVersionStampAsString) == 10.10.* ]]; then
+        clear
+      else
+        echo "Errore 2: impossibile riconoscere lo stato del SIP"
+        echo "Stai usando una versione di OS X inferiore alla 10.9?"
+        echo ""
+        echo "Se si, ti consiglio di aggiornare il Mac o usare il metodo fstab"
+        echo "Se no, segnala il bug su https://github.com/OpenSlime/ntfs-macos/issues"
+        echo "Premi Invio per ritornare al menu principale, altrimenti 'q' per uscire dallo script"
+        read input
+        if [[ $input == * ]]; then
+          main_menu
+        else if [[ $input == "q" || $input == "Q" ]]; then
+          exit 2
+          fi
+        fi
+      fi
+    fi
+  fi
 }
 
 ntfs_3g_enable() {
@@ -167,10 +204,12 @@ ntfs_3g_menu() {
     case ${input} in
         "1")
             clear;
+            sip;
             ntfs_3g_enable;;
         "2")
             clear;
-            ntfs_3g_disable;;
+            sip;
+            ntfs_3g_enable;;
         "3")
             main_menu;;
         "4")
@@ -255,7 +294,7 @@ about() {
     echo "╔═══════════════════════╡ OpenSlime ╞═══════════════════════╗"
     echo "║ Script creato da gstux e OlioDiPalmas per OpenSlime.it    ║"
     echo "║                                                           ║"
-    echo "║ Versione script: ${version}                                ║"
+    echo "║ Versione script: ${version}                                  ║"
     echo "║                                                           ║"
     echo "║ Questo script è distribuito sotto licenza MIT             ║"
     echo "║ Puoi guardarla dal file LICENSE oppure inviando 1         ║"
