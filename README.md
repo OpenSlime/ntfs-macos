@@ -12,17 +12,22 @@ Tutti i comandi necessari li farà **lui**. Tu dovrai solo confermare e, quando 
 * Command Line Tools di Xcode
 
 Per installare Command Line Tools di Xcode, apri il Terminale (Applicazioni > Utility) e invia questo comando:
+
 ```
 xcode-select --install
 ```
+
 Dopo averlo fatto, invia questi comandi per scaricare e avviare lo script:
+
 ```
-git clone https://github.com/OpenSlime/ntfs-macos.git
+git clone https://gitlab.com/OpenSlime/ntfs-macos.git
 cd ntfs-macos
 chmod 755 ntfs-macos.sh
-./ntfs-macos.sh           # Avvia lo script
+./ntfs-macos.sh     # Avvia lo script
 ```
+
 Se non stai usando bash ma un'altra shell (es. fish), per avviare lo script usa invece questo comando:
+
 ```
 bash ntfs-macos.sh
 ```
@@ -34,14 +39,13 @@ Prima di avviare lo script, è necessario **disattivare il SIP** se vuoi usare i
 
 1. Spegni il Mac e riaccendilo, tenendo premuto cmd (⌘) + R per entrare in modalità recovery
 2. Dopo qualche minuto, sarai nella modalità recovery. Sulla barra in alto clicca su Utility e apri il Terminale
-3. Aperto il terminale, scrivi questo comando e premi Invio:
-```
-csrutil disable
-```
+3. Aperto il terminale, scrivi questo comando e premi Invio: `csrutil disable`
 4. Se compare questo, complimenti! Hai disattivato il SIP :smiley:
+
 ```
 Successfully disabled System Integrity Protection. Please restart the machine for the changes to take effect.
 ```
+
 Non ti resta che riavviare il Mac e finalmente avviare il nostro script :grin:
 
 ### Riattivazione SIP
@@ -51,11 +55,9 @@ Dopo aver completato il metodo Homebrew e ntfs-3g, è **consigliato riabilitare 
 **Nota:** il SIP è stato introdotto da **OS X El Capitan (10.11) e successivi**. Se hai una versione di OS X **precedente** alla 10.11, disattivare/riattivare il SIP è **inutile** e puoi tranquillamente avviare lo script, saltando questa guida.
 
 1. Spegni il Mac e riavviarlo in modalità recovery
-2. Apri il Terminale e invia questo:
-```
-csrutil enable
-```
+2. Apri il Terminale e invia questo: `csrutil enable`
 3. Se compare questo, hai riattivato il SIP con successo:
+
 ```
 Successfully enabled System Integrity Protection. Please restart the machine for the changes to take effect.
 ```
