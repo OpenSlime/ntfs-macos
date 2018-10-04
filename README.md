@@ -6,7 +6,7 @@ Tutti i comandi necessari li farà **lui**. Tu dovrai solo confermare e, quando 
 # Preparazione
 
 **Requisiti**
-* OS X 10.9 e superiori (consigliato: OS X 10.11 e superiori) | **NON funziona su macOS Mojave Beta!**
+* OS X 10.9 e superiori (consigliato: OS X 10.11 e superiori)
 * SIP disattivato (vedi Disattivazione SIP)
 * Buona connessione Internet
 * Command Line Tools di Xcode
