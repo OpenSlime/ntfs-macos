@@ -1,5 +1,5 @@
-# ⚠️ ATTENZIONE: Attualmente lo script NON è compatibile con macOS Catalina (10.15)
-Clicca [qui](https://gitlab.com/OpenSlime/ntfs-macos/issues/5) per ulteriori info. Scusatemi per il disagio :( 
+# ⚠️ ATTENZIONE: Attualmente lo script NON è compatibile con macOS Catalina (10.15)!
+Presto arriverà un update dello script con la nuova soluzione. Per chi ha quella versione di macOS e vuole seguire il modo Homebrew e ntfs-3g senza aspettare l'update, [clicca qui](https://openslime.it/2018/07/scrittura-ntfs-macos/#Manuale_Metodo_NTFS-3G_con_Homebrew) per andare alla mia guida su OpenSlime. [Clicca qui](https://gitlab.com/OpenSlime/ntfs-macos/issues/5) per ulteriori info. Scusatemi per il disagio :( 
 
 # Abilita la scrittura NTFS su macOS
 
