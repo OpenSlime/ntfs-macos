@@ -1,3 +1,6 @@
+# ⚠️ ATTENZIONE: Attualmente lo script NON è compatibile con macOS Catalina (10.15)
+Clicca [qui](https://gitlab.com/OpenSlime/ntfs-macos/issues/5) per ulteriori info. Scusatemi per il disagio :( 
+
 # Abilita la scrittura NTFS su macOS
 
 Questo script **ti semplificherà la vita**, proponendo due modi per abilitare la scrittura NTFS.
