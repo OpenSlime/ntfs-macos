@@ -1,10 +1,53 @@
-version=1.0
+#!/bin/bash
+version=1.1-beta
+
 homebrew_install() {
-  echo ""
+  echo
   echo "Homebrew non installato. Ora lo installo..."
   sleep 2s
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.bash_profile
+}
+
+check_catalina_enablentfs() {
+  if [[ $(defaults read loginwindow SystemVersionStampAsString) > 10.15.* ]]; then
+    catalina_enablentfs
+  else
+    sip_enablentfs
+  fi
+}
+
+catalina_enablentfs() {
+  echo "Inserisci il nome completo del tuo disco macOS."
+  echo "Per trovarlo, apri Utility Disco in Applicazioni > Utility dal Finder e vedi il nome della partizione (es. Macintosh HD)"
+  read disk
+  if [[ $(brew doctor) != "Your system is ready to brew." ]]; then
+    homebrew_install;
+    if [[ $(brew doctor) == "Your system is ready to brew." ]]; then
+      brew cask install osxfuse
+      brew install ntfs-3g
+    else
+      echo "Errore 1: Homebrew non funzionante"
+      echo "Controlla l'errore che ti dà e riavvia lo script"
+      exit 1
+    fi
+  else
+    brew cask install osxfuse
+    brew install ntfs-3g
+  fi
+  sudo mount -uw /
+  sudo mv "/Volumes/${disk}/sbin/mount_ntfs" "/Volumes/${disk}/sbin/mount_ntfs.orig"
+  sudo ln -s "/usr/local/sbin/mount_ntfs" "/Volumes/${disk}/sbin/mount_ntfs"
+  echo && echo
+  echo "Fatto! Ho abilitato la scrittura NTFS :)"
+  echo "Vuoi riavviare ora? (y/n)"
+  read reboot
+  if [[ $reboot == "y" || $reboot == "Y" ]]; then
+    echo "Va bene :^)"
+    echo
+    echo "Inserisci la password se te lo chiedo"
+    sudo reboot
+  fi
 }
 
 sip_enablentfs() {
@@ -13,7 +56,7 @@ sip_enablentfs() {
   else if [[ $(csrutil status) == "System Integrity Protection status: enabled." ]]; then
     echo "Vedo che non hai disattivato il SIP prima di avviare lo script"
     echo "Per favore disattivalo tramite la guida presente nel README e poi riprova"
-    echo ""
+    echo
     echo "Premi Invio per ritornare al menu principale"
     echo "Altrimenti 'q' per uscire dallo script"
     read input
@@ -27,10 +70,10 @@ sip_enablentfs() {
   else
     echo "Errore 2: impossibile riconoscere lo stato del SIP"
     echo "Stai usando una versione di OS X inferiore alla 10.9?"
-    echo ""
+    echo
     echo "Se si, ti consiglio di aggiornare il Mac o usare il metodo fstab"
     echo "Se no, segnala il bug su https://gitlab.com/OpenSlime/ntfs-macos/issues"
-    echo ""
+    echo
     echo "Premi Invio per ritornare al menu principale"
     echo "Altrimenti 'q' per uscire dallo script"
     read input
@@ -64,13 +107,71 @@ ntfs_3g_enable() {
   fi
   sudo mv "/Volumes/${disk}/sbin/mount_ntfs" "/Volumes/${disk}/sbin/mount_ntfs.orig"
   sudo ln -s "/usr/local/sbin/mount_ntfs" "/Volumes/${disk}/sbin/mount_ntfs"
-  echo "" && echo ""
+  echo && echo
   echo "Fatto! Ho abilitato la scrittura NTFS :)"
   echo "Vuoi riavviare ora? (y/n)"
   read reboot
   if [[ $reboot == "y" || $reboot == "Y" ]]; then
     echo "Va bene :^)"
-    echo ""
+    echo
+    echo "Inserisci la password se te lo chiedo"
+    sudo reboot
+  fi
+}
+
+check_catalina_disablentfs() {
+  if [[ $(defaults read loginwindow SystemVersionStampAsString) > 10.15.* ]]; then
+    catalina_disablentfs
+  else
+    sip_disablentfs
+  fi
+}
+
+catalina_disablentfs() {
+  echo "Vuoi davvero disabilitare la scrittura NTFS? (y/n)"
+  read okay
+  if [[ $okay == "y" || $okay == "Y" ]]; then
+    echo
+    echo "Inserisci il nome completo del tuo disco macOS."
+    echo "Per trovarlo, apri Utility Disco in Applicazioni > Utility dal Finder e vedi il nome della partizione (es. Macintosh HD)"
+    read disk
+    sudo mount -uw /
+    sudo mv "/Volumes/${disk}/sbin/mount_ntfs.orig" "/Volumes/${disk}/sbin/mount_ntfs"
+    brew uninstall ntfs-3g
+    echo
+    echo "Vuoi rimuovere FUSE (osxfuse)?"
+    echo "Assicurati di non star usando programmi che dipendono da FUSE (es. pCloud Drive) per evitare problemi nel loro utilizzo."
+    read uninstallosxfuse
+    if [[ $uninstallosxfuse == "y" || $uninstallosxfuse == "Y" ]]; then
+      brew cask uninstall osxfuse
+      echo
+      echo "Vuoi anche rimuovere Homebrew? (y/n)"
+      read uninstallbrew
+      if [[ $uninstallbrew == "y" || $uninstallbrew == "Y" ]]; then
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+      else
+        echo
+        echo "Operazione completata."
+        echo "Vuoi riavviare ora? (y/n)"
+        read reboot
+        if [[ $reboot == "y" || $reboot == "Y" ]]; then
+          echo "Va bene :^)"
+          echo
+          echo "Inserisci la password se te lo chiedo"
+          sudo reboot
+        fi
+      fi
+    fi
+  else
+    ntfs_3g_menu
+  fi
+  echo
+  echo "Operazione completata."
+  echo "Vuoi riavviare ora? (y/n)"
+  read reboot
+  if [[ $reboot == "y" || $reboot == "Y" ]]; then
+    echo "Va bene :^)"
+    echo
     echo "Inserisci la password se te lo chiedo"
     sudo reboot
   fi
@@ -82,7 +183,7 @@ sip_disablentfs() {
   else if [[ $(csrutil status) == "System Integrity Protection status: enabled." ]]; then
     echo "Vedo che non hai disattivato il SIP prima di avviare lo script"
     echo "Per favore disattivalo tramite la guida presente nel README e poi riprova"
-    echo ""
+    echo
     echo "Premi Invio per ritornare al menu principale"
     echo "Altrimenti 'q' per uscire dallo script"
     read input
@@ -96,10 +197,10 @@ sip_disablentfs() {
   else
     echo "Errore 2: impossibile riconoscere lo stato del SIP"
     echo "Stai usando una versione di OS X inferiore alla 10.9?"
-    echo ""
+    echo
     echo "Se si, ti consiglio di aggiornare il Mac o usare il metodo fstab"
     echo "Se no, segnala il bug su https://gitlab.com/OpenSlime/ntfs-macos/issues"
-    echo ""
+    echo
     echo "Premi Invio per ritornare al menu principale"
     echo "Altrimenti 'q' per uscire dallo script"
     read input
@@ -117,31 +218,58 @@ ntfs_3g_disable() {
   echo "Vuoi davvero disabilitare la scrittura NTFS? (y/n)"
   read okay
   if [[ $okay == "y" || $okay == "Y" ]]; then
-    echo ""
+    echo
     echo "Inserisci il nome completo del tuo disco macOS."
     echo "Per trovarlo, apri Utility Disco in Applicazioni > Utility dal Finder e vedi il nome della partizione (es. Macintosh HD)"
     read disk
     sudo mv "/Volumes/${disk}/sbin/mount_ntfs.orig" "/Volumes/${disk}/sbin/mount_ntfs"
     brew uninstall ntfs-3g
-    brew cask uninstall osxfuse
-    echo ""
-    echo "Vuoi anche rimuovere Homebrew? (y/n)"
-    read uninstallbrew
-    if [[ $uninstallbrew == "y" || $uninstallbrew == "Y" ]]; then
-      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+    echo
+    echo "Vuoi rimuovere FUSE (osxfuse)?"
+    echo "Assicurati di non star usando programmi che dipendono da FUSE (es. pCloud Drive) per evitare problemi nel loro utilizzo."
+    read uninstallosxfuse
+    if [[ $uninstallosxfuse == "y" || $uninstallosxfuse == "Y" ]]; then
+      brew cask uninstall osxfuse
+      echo
+      echo "Vuoi anche rimuovere Homebrew? (y/n)"
+      read uninstallbrew
+      if [[ $uninstallbrew == "y" || $uninstallbrew == "Y" ]]; then
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+      else
+        echo
+        echo "Operazione completata."
+        echo "Vuoi riavviare ora? (y/n)"
+        read reboot
+        if [[ $reboot == "y" || $reboot == "Y" ]]; then
+          echo "Va bene :^)"
+          echo
+          echo "Inserisci la password se te lo chiedo"
+          sudo reboot
+        fi
+      fi
     fi
   else
     ntfs_3g_menu
   fi
-  echo ""
+  echo
   echo "Operazione completata."
   echo "Vuoi riavviare ora? (y/n)"
   read reboot
   if [[ $reboot == "y" || $reboot == "Y" ]]; then
     echo "Va bene :^)"
-    echo ""
+    echo
     echo "Inserisci la password se te lo chiedo"
     sudo reboot
+  fi
+}
+
+check_catalina_fstab_enable() {
+  if [[ $(defaults read loginwindow SystemVersionStampAsString) > 10.15.* ]]; then
+    echo "Il modo fstab non funziona su macOS Catalina e superiori"
+    sleep 5s
+    fstab_menu
+  else
+    fstab_enable
   fi
 }
 
@@ -150,17 +278,27 @@ fstab_enable() {
   read disk
   echo "LABEL=${disk}  none    ntfs    rw,auto,nobrowse" | sudo tee -a /etc/fstab
   sudo ln -s /Volumes ~/Desktop/Volumes
-  echo ""
+  echo
   echo "Fatto! Ho abilitato la scrittura NTFS :)"
   echo "Ricordati che il device NTFS verrà montata nella cartella Volumes, presente nel desktop."
-  echo ""
+  echo
   echo "Vuoi riavviare ora? (y/n)"
   read reboot
   if [[ $reboot == "y" || $reboot == "Y" ]]; then
     echo "Va bene :^)"
-    echo ""
+    echo
     echo "Inserisci la password se te lo chiedo"
     sudo reboot
+  fi
+}
+
+check_catalina_fstab_disable() {
+  if [[ $(defaults read loginwindow SystemVersionStampAsString) > 10.15.* ]]; then
+    echo "Il modo fstab non funziona su macOS Catalina e superiori"
+    sleep 5s
+    fstab_menu
+  else
+    fstab_disable
   fi
 }
 
@@ -168,21 +306,31 @@ fstab_disable() {
   echo "Continuando eliminerai completamente il file /etc/fstab. Continuare? (y/n)"
   read delete
   if [[ $delete == "y" || $delete == "Y" ]]; then
-    echo ""
+    echo
     sudo rm /etc/fstab
     rm ~/Desktop/Volumes
-    echo ""
+    echo
     echo "Operazione completata."
     echo "Vuoi riavviare ora? (y/n)"
     read reboot
     if [[ $reboot == "y" || $reboot == "Y" ]]; then
       echo "Va bene :^)"
-      echo ""
+      echo
       echo "Inserisci la password se te lo chiedo"
       sudo reboot
     fi
   else
     fstab_menu
+  fi
+}
+
+check_catalina_fstab_edit() {
+  if [[ $(defaults read loginwindow SystemVersionStampAsString) > 10.15.* ]]; then
+    echo "Il modo fstab non funziona su macOS Catalina e superiori"
+    sleep 5s
+    fstab_menu
+  else
+    fstab_edit
   fi
 }
 
@@ -198,7 +346,7 @@ fstab_editor() {
     if [[ $input == "y" || $input == "Y" ]]; then
       fstab_edit
     else if [[ $input == "n" || $input == "N" ]]; then
-      echo ""
+      echo
       echo "Vuoi usare lo stesso text editor? (y/n)"
       echo "Dopo che avrai finito, ritornerai al menu"
       read input
@@ -230,11 +378,11 @@ ntfs_3g_menu() {
   case ${input} in
     "1")
       clear;
-      sip_enablentfs;
+      check_catalina_enablentfs;
       exit;;
     "2")
       clear;
-      sip_disablentfs;
+      check_catalina_disablentfs;
       exit;;
     "3")
       main_menu;;
@@ -265,12 +413,13 @@ fstab_menu() {
   case ${input} in
     "1")
       clear;
-      fstab_enable;;
+      check_catalina_fstab_enable;;
     "2")
       clear;
-      fstab_disable;;
+      check_catalina_fstab_disable;;
     "3")
-      fstab_edit;;
+      clear;
+      check_catalina_fstab_edit;;
     "4")
       main_menu;;
     "5")
@@ -320,7 +469,7 @@ about() {
   echo "╔═══════════════════════╡ OpenSlime ╞═══════════════════════╗"
   echo "║ Script creato da gstux e OlioDiPalmas per OpenSlime.it    ║"
   echo "║                                                           ║"
-  echo "║ Versione script: ${version}                                      ║"
+  echo "║ Versione script: ${version}                                 ║"
   echo "║                                                           ║"
   echo "║ Questo script è distribuito sotto licenza MIT             ║"
   echo "║ Puoi guardarla dal file LICENSE oppure inviando 1         ║"
