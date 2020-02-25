@@ -32,6 +32,7 @@ catalina_sip_enablentfs() {
     else
       main_menu
     fi
+   fi
   fi
 }
 
@@ -160,6 +161,7 @@ catalina_sip_disablentfs() {
     else
       main_menu
     fi
+   fi
   fi
 }
 
