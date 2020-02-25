@@ -1,5 +1,5 @@
 #!/bin/bash
-version=1.1-beta
+version=1.1-beta2
 
 homebrew_install() {
   echo
@@ -11,9 +11,27 @@ homebrew_install() {
 
 check_catalina_enablentfs() {
   if [[ $(defaults read loginwindow SystemVersionStampAsString) > 10.15.* ]]; then
-    catalina_enablentfs
+    catalina_sip_enablentfs
   else
     sip_enablentfs
+  fi
+}
+
+catalina_sip_enablentfs() {
+  if [[ $(csrutil status) == "System Integrity Protection status: disabled." ]]; then
+    catalina_enablentfs
+  else if [[ $(csrutil status) == "System Integrity Protection status: enabled." ]]; then
+    echo "Vedo che non hai disattivato il SIP prima di avviare lo script"
+    echo "Per favore disattivalo tramite la guida presente nel README e poi riprova"
+    echo
+    echo "Premi Invio per ritornare al menu principale"
+    echo "Altrimenti 'q' per uscire dallo script"
+    read input
+    if [[ $input == "q" || $input == "Q" ]]; then
+      exit
+    else
+      main_menu
+    fi
   fi
 }
 
@@ -121,9 +139,27 @@ ntfs_3g_enable() {
 
 check_catalina_disablentfs() {
   if [[ $(defaults read loginwindow SystemVersionStampAsString) > 10.15.* ]]; then
-    catalina_disablentfs
+    catalina_sip_disablentfs
   else
     sip_disablentfs
+  fi
+}
+
+catalina_sip_disablentfs() {
+  if [[ $(csrutil status) == "System Integrity Protection status: disabled." ]]; then
+    catalina_disablentfs
+  else if [[ $(csrutil status) == "System Integrity Protection status: enabled." ]]; then
+    echo "Vedo che non hai disattivato il SIP prima di avviare lo script"
+    echo "Per favore disattivalo tramite la guida presente nel README e poi riprova"
+    echo
+    echo "Premi Invio per ritornare al menu principale"
+    echo "Altrimenti 'q' per uscire dallo script"
+    read input
+    if [[ $input == "q" || $input == "Q" ]]; then
+      exit
+    else
+      main_menu
+    fi
   fi
 }
 
@@ -469,7 +505,7 @@ about() {
   echo "╔═══════════════════════╡ OpenSlime ╞═══════════════════════╗"
   echo "║ Script creato da gstux e OlioDiPalmas per OpenSlime.it    ║"
   echo "║                                                           ║"
-  echo "║ Versione script: ${version}                                 ║"
+  echo "║ Versione script: ${version}                                ║"
   echo "║                                                           ║"
   echo "║ Questo script è distribuito sotto licenza MIT             ║"
   echo "║ Puoi guardarla dal file LICENSE oppure inviando 1         ║"
