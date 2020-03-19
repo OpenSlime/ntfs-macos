@@ -7,7 +7,7 @@ Tutti i comandi necessari li farà **lui**. Tu dovrai solo confermare e, quando 
 
 Non avendo più il mio Macbook Pro ma un PC con Windows e GNU/Linux, aggiornare con sicurezza lo script mi è sempre più difficile. Ovviamente **non abbandonerò** lo script e lo aggiornerò se c'é bisogno. In futuro magari troverò un modo per avere a portata di mano macOS.
 
-Per favore, segnalate eventuali errori nella [sezione dedicata](https://gitlab.com/OpenSlime/ntfs-macos/issues), includendo tutte le informazioni necessarie per risolvere il problema, grazie :^)
+Per favore, segnalate eventuali errori nella [sezione dedicata](https://github.com/OpenSlime/ntfs-macos/issues), includendo tutte le informazioni necessarie per risolvere il problema, grazie :^)
 
 # Preparazione
 
@@ -26,7 +26,7 @@ xcode-select --install
 Dopo averlo fatto, invia questi comandi per scaricare e avviare lo script:
 
 ```
-git clone https://gitlab.com/OpenSlime/ntfs-macos.git
+git clone https://github.com/OpenSlime/ntfs-macos.git
 cd ntfs-macos
 chmod 755 ntfs-macos.sh
 ./ntfs-macos.sh     # Avvia lo script

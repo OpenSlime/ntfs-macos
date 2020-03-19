@@ -91,7 +91,7 @@ sip_enablentfs() {
     echo "Stai usando una versione di OS X inferiore alla 10.9?"
     echo
     echo "Se si, ti consiglio di aggiornare il Mac o usare il metodo fstab"
-    echo "Se no, segnala il bug su https://gitlab.com/OpenSlime/ntfs-macos/issues"
+    echo "Se no, segnala il bug su https://github.com/OpenSlime/ntfs-macos/issues"
     echo
     echo "Premi Invio per ritornare al menu principale"
     echo "Altrimenti 'q' per uscire dallo script"
@@ -237,7 +237,7 @@ sip_disablentfs() {
     echo "Stai usando una versione di OS X inferiore alla 10.9?"
     echo
     echo "Se si, ti consiglio di aggiornare il Mac o usare il metodo fstab"
-    echo "Se no, segnala il bug su https://gitlab.com/OpenSlime/ntfs-macos/issues"
+    echo "Se no, segnala il bug su https://github.com/OpenSlime/ntfs-macos/issues"
     echo
     echo "Premi Invio per ritornare al menu principale"
     echo "Altrimenti 'q' per uscire dallo script"
@@ -512,9 +512,9 @@ about() {
   echo "║ Questo script è distribuito sotto licenza MIT             ║"
   echo "║ Puoi guardarla dal file LICENSE oppure inviando 1         ║"
   echo "║                                                           ║"
-  echo "║ https://gitlab.com/gstux                                  ║"
-  echo "║ https://gitlab.com/OlioDiPalmas                           ║"
-  echo "║ https://gitlab.com/OpenSlime                              ║"
+  echo "║ https://github.com/gstux                                  ║"
+  echo "║ https://github.com/OlioDiPalmas                           ║"
+  echo "║ https://github.com/OpenSlime                              ║"
   echo "╠═══╦═══════════════════════════════════════════════════════╣"
   echo "║ 1 ║ Vedi ora la licenza                                   ║"
   echo "║ 2 ║ Torna indietro                                        ║"
