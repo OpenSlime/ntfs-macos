@@ -1,5 +1,5 @@
 #!/bin/bash
-version=1.1-beta2
+version=1.1-beta3
 
 homebrew_install() {
   echo
@@ -18,11 +18,15 @@ check_catalina_enablentfs() {
 }
 
 catalina_sip_enablentfs() {
-  if [[ $(csrutil status) == "System Integrity Protection status: disabled." ]]; then
+  if [[ $(csrutil status) == "System Integrity Protection status: disabled." || $(csrutil status) == "System Integrity Protection status: disabled (Apple Internal)." ]]; then
     catalina_enablentfs
-  else if [[ $(csrutil status) == "System Integrity Protection status: enabled." ]]; then
+  else
     echo "Vedo che non hai disattivato il SIP prima di avviare lo script"
     echo "Per favore disattivalo tramite la guida presente nel README e poi riprova"
+    echo
+    echo "Hai un hackintosh? Per favore avvia nel terminale 'csrutil status' e"
+    echo "verifica di non avere 'unknown (Custom Configuration)' o simile"
+    echo "Se ce l'hai, disabilita il SIP o modifica il file config.plist di Clover o OpenCore"
     echo
     echo "Premi Invio per ritornare al menu principale"
     echo "Altrimenti 'q' per uscire dallo script"
@@ -32,7 +36,6 @@ catalina_sip_enablentfs() {
     else
       main_menu
     fi
-   fi
   fi
 }
 
@@ -70,7 +73,7 @@ catalina_enablentfs() {
 }
 
 sip_enablentfs() {
-  if [[ $(csrutil status) == "System Integrity Protection status: disabled." ]]; then
+  if [[ $(csrutil status) == "System Integrity Protection status: disabled." || $(csrutil status) == "System Integrity Protection status: disabled (Apple Internal)." ]]; then
     ntfs_3g_enable
   else if [[ $(csrutil status) == "System Integrity Protection status: enabled." ]]; then
     echo "Vedo che non hai disattivato il SIP prima di avviare lo script"
@@ -89,6 +92,10 @@ sip_enablentfs() {
   else
     echo "Errore 2: impossibile riconoscere lo stato del SIP"
     echo "Stai usando una versione di OS X inferiore alla 10.9?"
+    echo
+    echo "Hai un hackintosh? Per favore avvia nel terminale 'csrutil status' e"
+    echo "verifica di non avere 'unknown (Custom Configuration)' o simile"
+    echo "Se ce l'hai, disabilita il SIP o modifica il file config.plist di Clover o OpenCore"
     echo
     echo "Se si, ti consiglio di aggiornare il Mac o usare il metodo fstab"
     echo "Se no, segnala il bug su https://github.com/OpenSlime/ntfs-macos/issues"
@@ -147,11 +154,15 @@ check_catalina_disablentfs() {
 }
 
 catalina_sip_disablentfs() {
-  if [[ $(csrutil status) == "System Integrity Protection status: disabled." ]]; then
+  if [[ $(csrutil status) == "System Integrity Protection status: disabled." || $(csrutil status) == "System Integrity Protection status: disabled (Apple Internal)." ]]; then
     catalina_disablentfs
-  else if [[ $(csrutil status) == "System Integrity Protection status: enabled." ]]; then
+  else
     echo "Vedo che non hai disattivato il SIP prima di avviare lo script"
     echo "Per favore disattivalo tramite la guida presente nel README e poi riprova"
+    echo
+    echo "Hai un hackintosh? Per favore avvia nel terminale 'csrutil status' e"
+    echo "verifica di non avere 'unknown (Custom Configuration)' o simile"
+    echo "Se ce l'hai, disabilita il SIP o modifica il file config.plist di Clover o OpenCore"
     echo
     echo "Premi Invio per ritornare al menu principale"
     echo "Altrimenti 'q' per uscire dallo script"
@@ -161,7 +172,6 @@ catalina_sip_disablentfs() {
     else
       main_menu
     fi
-   fi
   fi
 }
 
@@ -216,7 +226,7 @@ catalina_disablentfs() {
 }
 
 sip_disablentfs() {
-  if [[ $(csrutil status) == "System Integrity Protection status: disabled." ]]; then
+  if [[ $(csrutil status) == "System Integrity Protection status: disabled." || $(csrutil status) == "System Integrity Protection status: disabled (Apple Internal)." ]]; then
     ntfs_3g_disable
   else if [[ $(csrutil status) == "System Integrity Protection status: enabled." ]]; then
     echo "Vedo che non hai disattivato il SIP prima di avviare lo script"
@@ -234,6 +244,11 @@ sip_disablentfs() {
     ntfs_3g_disable
   else
     echo "Errore 2: impossibile riconoscere lo stato del SIP"
+    echo
+    echo "Hai un hackintosh? Per favore avvia nel terminale 'csrutil status' e"
+    echo "verifica di non avere 'unknown (Custom Configuration)' o simile"
+    echo "Se ce l'hai, disabilita il SIP o modifica il file config.plist di Clover o OpenCore"
+    echo
     echo "Stai usando una versione di OS X inferiore alla 10.9?"
     echo
     echo "Se si, ti consiglio di aggiornare il Mac o usare il metodo fstab"

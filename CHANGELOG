@@ -1,3 +1,6 @@
+v1.1 beta 3:
+- Miglior compatibilità con PC non-Mac (Hackintosh)
+
 v1.1 beta 2:
 - Aggiunta verifica SIP anche su macOS Catalina, evitando errori nei permessi
 
