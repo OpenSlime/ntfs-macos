@@ -44,8 +44,6 @@ Prima di avviare lo script, è necessario **disattivare il SIP** se vuoi usare i
 
 **Nota:** il SIP è stato introdotto da **OS X El Capitan (10.11) e successivi**. Se hai una versione di OS X **precedente** alla 10.11, disattivare/riattivare il SIP è **inutile** e puoi tranquillamente avviare lo script, saltando questa guida.
 
-**Attenzione**: se usi un hackintosh, il **SIP è già disattivato** ed è inutile fare questa parte. Avvia direttamente lo script.
-
 1. Spegni il Mac e riaccendilo, tenendo premuto cmd (⌘) + R per entrare in modalità recovery
 2. Dopo qualche minuto, sarai nella modalità recovery. Sulla barra in alto clicca su Utility e apri il Terminale
 3. Aperto il terminale, scrivi questo comando e premi Invio: `csrutil disable`
@@ -62,8 +60,6 @@ Non ti resta che riavviare il Mac e finalmente avviare il nostro script :grin:
 Dopo aver completato il metodo Homebrew e ntfs-3g, è **consigliato riabilitare SIP**, per rendere il tuo macOS meno vulnerabile.
 
 **Nota:** il SIP è stato introdotto da **OS X El Capitan (10.11) e successivi**. Se hai una versione di OS X **precedente** alla 10.11, disattivare/riattivare il SIP è **inutile** e puoi tranquillamente avviare lo script, saltando questa guida.
-
-**Attenzione:** **NON** riabilitare il SIP se hai un **hackintosh!**
 
 1. Spegni il Mac e riavviarlo in modalità recovery
 2. Apri il Terminale e invia questo: `csrutil enable`
