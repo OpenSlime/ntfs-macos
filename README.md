@@ -3,12 +3,6 @@
 Questo script **ti semplificherà la vita**, proponendo due modi per abilitare la scrittura NTFS.
 Tutti i comandi necessari li farà **lui**. Tu dovrai solo confermare e, quando richiesto, inserire la tua password.
 
-## ⚠️ Avviso importante
-
-Non avendo più il mio Macbook Pro ma un PC con Windows e GNU/Linux, aggiornare con sicurezza lo script mi è sempre più difficile. Ovviamente **non abbandonerò** lo script e lo aggiornerò se c'é bisogno. In futuro magari troverò un modo per avere a portata di mano macOS.
-
-Per favore, segnalate eventuali errori nella [sezione dedicata](https://github.com/OpenSlime/ntfs-macos/issues), includendo tutte le informazioni necessarie per risolvere il problema, grazie :^)
-
 # Preparazione
 
 **Requisiti**
