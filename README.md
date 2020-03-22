@@ -50,9 +50,7 @@ Prima di avviare lo script, è necessario **disattivare il SIP** se vuoi usare i
 csrutil status
 ```
 
-Se mostra “`System Integrity Protection status: unknown (Custom Configuration)`” o simili, potresti non avere un SIP completamente disattivato.
-
-Se **non** ce l’hai, disattiva il SIP andando in Recovery o modifica il config.plist di Clover o OpenCore.
+Se mostra “`System Integrity Protection status: unknown (Custom Configuration)`” o simili, potresti non avere un SIP completamente disattivato. Se **non** ce l’hai, disattiva il SIP andando in Recovery o modifica il config.plist di Clover o OpenCore.
 
 1. Spegni il Mac e riaccendilo, tenendo premuto cmd (⌘) + R per entrare in modalità recovery
 2. Dopo qualche minuto, sarai nella modalità recovery. Sulla barra in alto clicca su Utility e apri il Terminale
