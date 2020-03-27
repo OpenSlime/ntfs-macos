@@ -7,7 +7,7 @@ Tutti i comandi necessari li farà **lui**. Tu dovrai solo confermare e, quando 
 
 **Requisiti**
 * OS X 10.9 e superiori (consigliato: OS X 10.11 e superiori) ~ Le versioni beta di macOS potrebbero **non** essere compatibili con il modo Homebrew e ntfs-3g, quindi **FAI ATTENZIONE!!**
-* SIP disattivato (vedi Disattivazione SIP)
+* SIP disattivato (vedi [Disattivazione SIP](https://github.com/OpenSlime/ntfs-macos#disattivazione-sip))
 * Buona connessione Internet
 * Command Line Tools di Xcode
 
@@ -88,6 +88,7 @@ I due modi per abilitare la scrittura NTFS sono:
 Ovviamente dovrai scegliere **solo uno** di questi modi.
 
 ### Se vuoi usare fstab...
+* Se il nome del device NTFS **contiene spazi**, sostituiscili con \040 (es. USB\040Slime)
 * Per aggiungere un altro device NTFS, **dovrai rifare l'operazione**
 * Collegando il device NTFS, questo **non** comparirà nella scrivania. Sarà nella cartella Volumes, già presente nella scrivania dopo aver completato l'operazione "Abilita scrittura NTFS"
 * L'opzione "Disabilita scrittura NTFS" rimuove **completamente** il file /etc/fstab

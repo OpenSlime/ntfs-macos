@@ -1,3 +1,8 @@
+v1.1 stabile:
+- Riabilitato modo fstab per macOS Catalina
+- [fstab] È possibile usare gli spazi se sono presenti nel nome del disco NTFS
+- Ottimizzazione codice; modifiche minori
+
 v1.1 beta 3:
 - Miglior compatibilità con PC non-Mac (Hackintosh)
 
