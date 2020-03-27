@@ -22,7 +22,6 @@ Dopo averlo fatto, invia questi comandi per scaricare e avviare lo script:
 ```
 git clone https://github.com/OpenSlime/ntfs-macos.git
 cd ntfs-macos
-chmod 755 ntfs-macos.sh
 ./ntfs-macos.sh     # Avvia lo script
 ```
 
