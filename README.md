@@ -3,13 +3,24 @@
 Questo script **ti semplificherà la vita**, proponendo due modi per abilitare la scrittura NTFS.
 Tutti i comandi necessari li farà **lui**. Tu dovrai solo confermare e, quando richiesto, inserire la tua password.
 
-# Preparazione
+### ⚠ Attualmente non ho un Mac per mantenere al 100% lo script. Potrebbero esserci update minori in futuro, ma non nuove aggiunte ⚠
 
-**Requisiti**
+Se hai un problema con lo script, per favore crea una issue completa di tutti i dettagli (errore che ti ha dato, che modo stai usando, modello del Mac, versione di macOS ed ecc.), così da aiutarti al meglio 😁
+
+# Requisiti
+
 * OS X 10.9 e superiori (consigliato: OS X 10.11 e superiori) ~ Le versioni beta di macOS potrebbero **non** essere compatibili con il modo Homebrew e ntfs-3g, quindi **FAI ATTENZIONE!!**
 * SIP disattivato (vedi [Disattivazione SIP](https://github.com/OpenSlime/ntfs-macos#disattivazione-sip))
 * Buona connessione Internet
 * Command Line Tools di Xcode
+
+## Ma lo script funziona su Mac con CPU Apple Silicon (Apple M1)? 🤔
+
+Teoricamente lo script in sé non dovrebbe avere problemi ad avviarsi nel terminale, ma non avendo quel Mac non posso confermarlo con certezza nè verificare la loro compatibilità sui due modi disponibili e sulle miniguide presenti qui.
+
+Segui il README ed avvia lo script **a tuo rischio e pericolo**. Se ci dovessero essere problemi, crea una issue nella sezione apposita e proverò ad aiutarti 😉
+
+# Preparazione
 
 Per installare Command Line Tools di Xcode, apri il Terminale (Applicazioni > Utility) e invia questo comando:
 
@@ -106,4 +117,4 @@ Per leggerla, apri il file LICENSE oppure, avviato lo script, vai su 3) Informaz
 * [osxfuse](https://github.com/osxfuse/osxfuse) per FUSE for macOS e per la wiki su [NTFS-3G](https://github.com/osxfuse/osxfuse/wiki/NTFS-3G)
 * [Learn-a-holic Geek Notes](http://learnaholic.me/2013/11/11/enable-ntfs-write-on-mac-os-x-mavericks/) per l'articolo su fstab
 
-Sono ben accetti aiuti e ulteriori test (soprattutto su OS X 10.9 e OS X 10.10) che possano migliorare questo script :smile:
+Sono ben accetti aiuti e ulteriori test, in particolare su Mac con CPU Apple Silicon e su Mac con OS X 10.9 e OS X 10.10, che possano migliorare questo script :smile:
