@@ -1,9 +1,9 @@
+## ℹ️ Archivio lo script perché non mi è possibile aggiornarlo senza macOS. Inoltre con l'introduzione del [SSV](https://eclecticlight.co/2020/06/25/big-surs-signed-system-volume-added-security-protection/) ha reso più difficile applicare il metodo Homebrew e ntfs-3g. Magari in futuro potrei riprenderlo, ma non prometto niente 😛
+
 # Abilita la scrittura NTFS su macOS
 
 Questo script **ti semplificherà la vita**, proponendo due modi per abilitare la scrittura NTFS.
 Tutti i comandi necessari li farà **lui**. Tu dovrai solo confermare e, quando richiesto, inserire la tua password.
-
-### ⚠ Attualmente non ho un Mac per mantenere al 100% lo script. Potrebbero esserci update minori in futuro, ma non nuove aggiunte ⚠
 
 Se hai un problema con lo script, per favore crea una issue completa di tutti i dettagli (errore che ti ha dato, che modo stai usando, modello del Mac, versione di macOS ed ecc.), così da aiutarti al meglio 😁
 
